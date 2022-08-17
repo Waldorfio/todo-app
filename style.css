@@ -60,6 +60,7 @@ body {
         }
 
 
+/*--------------- THE CONTENT STYLING ---------------*/
 #content-container {
     display: grid;
     grid-template-rows: 70px 1fr 1fr 35px;
@@ -91,6 +92,15 @@ body {
             display: grid;
             grid-template-columns: 50px 1fr;
             grid-template-rows: 25px 25px;
+
+            background-color: rgb(42,42,42);
+        }
+        .cards:hover {
+            background-color: rgb(55,55,55);
+        }
+        .cards:active:hover:not(.checkbox) {        /* Only reducing font size of card, not checkbox tick */
+            padding: 5px;
+            font-size: 95%;
         }
             .checkbox {
                 grid-column: 1/2;
@@ -108,14 +118,16 @@ body {
                 font-weight: bold;
                 font-size: 1.2em;
             }
-            .checkbox:hover::after {          /* Changes hover effects for checkbox */
+            .checkbox:hover::after {            /* Changes hover effects for checkbox */
                 content: '✓';
             }
-            .checkbox:active:hover:after {    /* Makes it so that the highlight is only made whilst hovering */
+            .checkbox:active:hover:after {      /* Makes it so that the highlight is only made whilst hovering */
                 content: '✓';
+                border-color: rgb(28,28,28);
+                color: rgb(28,28,28);
+            }
+            .checkbox:active:hover {            /* Changes the background colour only. Fixes issue where only text would have highlight applied */
                 background-color: white;
-                border-color: black;
-                color: black;
             }
             .titles, .subcontainer {
                 grid-column: 2/3;
