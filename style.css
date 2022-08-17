@@ -108,8 +108,14 @@ body {
                 font-weight: bold;
                 font-size: 1.2em;
             }
-            .checkbox:hover::after {
+            .checkbox:hover::after {          /* Changes hover effects for checkbox */
                 content: '✓';
+            }
+            .checkbox:active:hover:after {    /* Makes it so that the highlight is only made whilst hovering */
+                content: '✓';
+                background-color: white;
+                border-color: black;
+                color: black;
             }
             .titles, .subcontainer {
                 grid-column: 2/3;
