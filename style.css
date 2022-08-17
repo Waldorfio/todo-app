@@ -2,6 +2,7 @@
 * {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
+    user-select: none;   /* Disables text highlighting. Individually removed later for to-do items */
 }
 body,html {
     margin: 0;
@@ -35,10 +36,28 @@ body {
     }
     #project-template {
         border: 1px solid blue;
+        border-radius: 5px;
     }
     #new-container {
         border: 1px solid blue;
+        border-radius: 10px;
+
+        display: grid;
+        grid-template-columns: 20px 1fr;
     }
+    #project-template:hover, #new-container:hover {
+        background-color: rgb(51,51,51);
+    }
+        #plus-button {
+            align-self: center;
+            justify-self: center;
+
+            font-size: 2em;
+            border: 1px solid orange;
+        }
+        #new-list {
+            border: 1px solid green;
+        }
 
 
 #content-container {
@@ -88,6 +107,9 @@ body {
 
                 font-weight: bold;
                 font-size: 1.2em;
+            }
+            .checkbox:hover::after {
+                content: '✓';
             }
             .titles, .subcontainer {
                 grid-column: 2/3;
