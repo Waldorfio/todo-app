@@ -108,6 +108,7 @@ body {
         gap: 5px;
 
         margin-top: 10px;
+        align-content: start;           /* Append new list items from the top of the page */
     }
         #project-template {
             margin: 10px 0 10px 0;
@@ -188,8 +189,8 @@ body {
             background-color: rgb(55,55,55);
         }
         .cards:active:hover:not(.checkbox) {        /* Only reducing font size of card, not checkbox tick */
-            padding: 5px;
-            font-size: 90%;
+            /* padding: 5px;
+            font-size: 90%; */
         }
             .checkbox {
                 grid-column: 1/2;
