@@ -5,24 +5,28 @@
     <title>TITLE</title>
     <script src="index.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
 
     <div id="lhs-container">
         <div id="user-profile">
-            <div id="profile-img"></div>
+            <!-- <div id="profile-img"></div> -->
+            <img src="profile.png" id="profile-img">
             <div id="user-name">Hanifi, Walid</div>
             <div id="user-email">whanifi@klohn.com</div>
         </div>
         <div id="search-container">
-            <div id="search-bar">Search</div>
-            <div id="search-button"></div>
+            <input id="search-bar" type="search" name="search-bar" placeholder="Search" required>
+            <span id="search-button" class="material-symbols-outlined">search</span>
+            
         </div>
-        <div id="project-template">A PROJECT NAME</div>
-        <span></span>
+        <div id="project-list-container">
+            <div id="project-template">A PROJECT NAME</div>
+        </div>
         <div id="new-container">
-            <div id="plus-button">+</div>
+            <span id="plus-button" class="material-symbols-outlined">add</span>
             <div id="new-list">New list</div>
         </div>
     </div>
@@ -31,7 +35,7 @@
     <div id="content-container">
         <div id="project-container">
             <div id="project">A PROJECT NAME</div>
-            <div id="three-dots">...</div>
+            <span id="three-dots" class="material-symbols-outlined">more_horiz</span>
         </div>
         <div id="todo">
             <div id="to-complete">To Complete 07</div>
@@ -55,7 +59,10 @@
                 </div>
             </div>
         </div>
-        <div id="add-task">+ Add a task</div>
+        <div id="add-task-container">
+            <span id="plus-button" class="material-symbols-outlined"></span>
+            <input id="add-task" type="search" name="add-task" placeholder="Add a task">
+        </div>
     </div>
 
 </body>
