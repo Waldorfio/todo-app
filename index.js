@@ -10,10 +10,11 @@ let listIndex = 0;      // Stores the index of lists created
 
 
 containerLog = [];
-function containerFactory(projectName, colour) {
+function containerFactory(projectName, colour, todo) {
     return {
         projectName: projectName,
         colour: colour,
+        todo: todo,
     }
 }
 
@@ -34,7 +35,9 @@ function todoFactory(itemName, subItems, dueDate, status) {
 
 newContainer = document.getElementById('new-container');
 newContainer.addEventListener('click', function() {
-    newList = containerFactory('placeholder', 'orange');
+    newList = containerFactory('placeholder', 'orange', []);
+    cc = todoFactory('tester', '7 of 11', 'Mon, 17 Aug', false);
+    newList.todo.push(cc);
     createList('placeholder', 'orange');
     containerLog.push(newList);
 });
@@ -82,7 +85,43 @@ function createList(projectName, colour) {
         obj = containerLog[listIndex-1];
         document.getElementById('project').innerHTML = obj.projectName;
         document.getElementById('project').style['color'] = obj.colour;
-        
+        // Clearing todo items on DOM
+        document.querySelectorAll('#todo-card').forEach(e => e.remove());
+        // Updating the DOM with the todo items from the respective list clicked on
+        for (i=0; i<(obj.todo.length); i++) {
+            todoCont = document.createElement('div');
+            todoCont.id = 'todo-card';
+            todoCont.className = 'cards';
+
+            checkBox = document.createElement('div');
+            checkBox.id = 'todo-checkbox';
+            checkBox.className = 'checkbox';
+
+            todoTitle = document.createElement('div');
+            todoTitle.id = 'todo-title';
+            todoTitle.className = 'titles';
+            todoTitle.innerHTML = obj.todo[i].itemName;
+
+            todoSub = document.createElement('div');
+            todoSub.id = 'todo-subcontainer';
+            todoSub.className = 'subcontainer';
+
+            todoSubItem = document.createElement('div');
+            todoSubItem.id = 'todo-subitem';
+            todoSubItem.innerHTML = obj.todo[i].subItems;
+
+            todoDue = document.createElement('div');
+            todoDue.id = 'todo-due';
+            todoDue.innerHTML = obj.todo[i].dueDate;
+
+            document.getElementById('todo').appendChild(todoCont);
+            todoCont.appendChild(checkBox);
+            todoCont.appendChild(todoTitle);
+            todoCont.appendChild(todoSub);
+            todoSub.appendChild(todoSubItem);
+            todoSub.appendChild(todoDue);
+
+        }
     }
 
 }
