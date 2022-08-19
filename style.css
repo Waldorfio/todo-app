@@ -202,7 +202,33 @@ body {
             background-color: rgb(68,68,68);
         }
     #todo, #completed {
+        display: grid;
+        grid-template-rows: 25px auto;
+        gap: 10px;
 
+        align-content: start;
+    }
+    .to-complete {
+        background-color: rgb(42,42,42);
+        border-radius: 6px;
+        padding: 6px;
+        padding-right: 10px;
+
+        justify-self: start;
+        align-self: center;
+
+        display: grid;
+        grid-template-columns: 30px 1fr;
+    }
+    .to-complete:hover {
+        background-color: rgb(55,55,55);
+    }
+    .to-complete:hover:active {
+        background-color: rgb(68,68,68);
+    }
+    #todo-id-logo, #completed-id-logo {
+        align-self: center;
+        justify-self: center;
     }
         .cards {
             display: grid;
@@ -210,6 +236,7 @@ body {
             grid-template-rows: 25px 25px;
 
             background-color: rgb(42,42,42);
+            font-size: 1em;
         }
         .cards:hover {
             background-color: rgb(55,55,55);
