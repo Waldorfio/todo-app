@@ -10,8 +10,8 @@ function checkboxClicked() {
 }
 
 
-
 listArr = []
+let listIndex = 1;      // Stores the index of lists created
 
 function listFactory(projectName, colour) { // Creates "new list" objects
     return {
@@ -31,10 +31,39 @@ function newContainerClicked() {
 }
 
 console.log('----------');
-
+let i = 1;
 function createList(projectName, colour) {
-    list = document.createElement('div');
+    // list = document.createElement('input');
+    // list.id = 'project-template';
+    // list.type = 'text';
+    // list.name = 'project-template';
+    // list.value = 'Untitled-list '+listIndex;
+    // document.getElementById('project-list-container').appendChild(list);
+
+
+    divContainer = document.createElement('div');
+    divContainer.id = 'project-template-container';
+    
+    stackLogo = document.createElement('span');
+    stackLogo.className = 'material-symbols-outlined';
+    stackLogo.innerHTML = 'menu';
+    stackLogo.id = 'stack-logo'+listIndex;
+
+    list = document.createElement('input');
     list.id = 'project-template';
-    list.innerHTML = projectName;
-    document.getElementById('project-list-container').appendChild(list);
+    list.type = 'text';
+    list.name = 'project-template';
+    list.value = 'Untitled-list '+listIndex;
+
+    // Append new elements to container
+    document.getElementById('project-list-container').appendChild(divContainer);
+    divContainer.appendChild(stackLogo);
+    divContainer.appendChild(list);
+
+    // Select the newly created list
+    list.focus();               // Clicks on the new list
+    list.select();              // Highlights the new list
+    listIndex = listIndex + 1;
+
+    console.log('created '+listIndex);
 }
