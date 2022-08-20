@@ -5,6 +5,11 @@ console.clear();
 
 let listIndex = 0;      // Stores the index of lists created
 
+var audio = new Audio();
+audio.src = "completed.mp3";
+audio.preload = 'auto';
+
+
 
 // -------- FACTORY FUNCTIONS  -------- //
 
@@ -126,6 +131,8 @@ function createList(projectName, colour) {
             function checkItem(obj, i, cardCont) {
                 obj.todo[i].status = true;
                 document.getElementById('completed').appendChild(cardCont);
+                audio.currentTime = 0.08;
+                audio.play();
                 console.log('appended'+obj.todo[i]);
             }
 
@@ -174,14 +181,4 @@ function collapseComp() {
         hiddenComp = false;
         return
     }
-}
-
-    // Check off items from list
-
-checkbox = document.getElementById('todo-checkbox');
-checkbox.addEventListener('click', () => checkboxClicked());
-
-function checkboxClicked() {
-    console.log('a checkbox was clicked');
-    // LOGIC TO CHANGE 'status' of relevant todo item
 }
