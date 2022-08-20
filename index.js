@@ -77,11 +77,14 @@ function createList(projectName, colour) {
     listIndex = listIndex + 1;
 
     // Update object if list name changes
-    list.addEventListener("change", listChange.bind(this, list, listIndex));
-    function listChange(list,listIndex) {
-        console.log(list.value);
-        containerLog[listIndex-1].projectName = list.value;
+    function updateListName() {
+        list.addEventListener("change", listChange.bind(this, list, listIndex));
+        function listChange(list,listIndex) {
+            console.log(list.value);
+            containerLog[listIndex-1].projectName = list.value;
+        }
     }
+    updateListName();
 
     // Wiping content per tab change
     divContainer.addEventListener("click", switchTab.bind(this, listIndex));
@@ -140,9 +143,6 @@ function createList(projectName, colour) {
     }
 
 }
-
-
-
 
     // COLLAPSING ITEMS
 
