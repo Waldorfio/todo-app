@@ -144,7 +144,7 @@ function createList(projectName, colour) {
 
 
 
-    // Collapse Completed/Incomplete tasks
+    // COLLAPSING ITEMS
 
 // Controls incomplete tasks
 let hiddenTodo = false;
@@ -152,13 +152,13 @@ toCompId = document.getElementById('to-complete-id');
 toCompId.addEventListener('click', () => collapseTodo());
 function collapseTodo() {
     if (hiddenTodo==false) {
-        document.getElementById('todo-card').style.display = 'none';
+        for (let cards of document.querySelectorAll('#todo .cards')) cards.style.visibility = 'hidden';
         document.getElementById('todo-id-logo').innerHTML = 'navigate_next';
         hiddenTodo = true; 
         return
     }
     if (hiddenTodo==true) {
-        document.getElementById('todo-card').style.display = '';
+        for (let cards of document.querySelectorAll('#todo .cards')) cards.style.visibility = '';
         document.getElementById('todo-id-logo').innerHTML = 'expand_more';
         hiddenTodo = false;
         return
@@ -170,13 +170,13 @@ compId = document.getElementById('completed-id');
 compId.addEventListener('click', () => collapseComp());
 function collapseComp() {
     if (hiddenComp==false) {
-        document.getElementById('comp-card').style.display = 'none';
+        for (let cards of document.querySelectorAll('#completed .cards')) cards.style.visibility = 'hidden';
         document.getElementById('completed-id-logo').innerHTML = 'navigate_next';
         hiddenComp = true; 
         return
     }
     if (hiddenComp==true) {
-        document.getElementById('comp-card').style.display = '';
+        for (let cards of document.querySelectorAll('#completed .cards')) cards.style.visibility = '';
         document.getElementById('completed-id-logo').innerHTML = 'expand_more';
         hiddenComp = false;
         return
