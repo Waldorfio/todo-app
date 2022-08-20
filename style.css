@@ -272,15 +272,15 @@ body {
             .checkbox:active:hover {            /* Changes the background colour only. Fixes issue where only text would have highlight applied */
                 background-color: white;
             }
-            .titles, .subcontainer {
+            .card-title, .card-subcontainer {
                 grid-column: 2/3;
             }
-            .titles {
+            .card-title {
                 grid-row: 1/2;
 
                 align-self: center;
             }
-            .subcontainer {
+            .card-subcontainer {
                 grid-row: 2/3;
 
                 align-self: center;

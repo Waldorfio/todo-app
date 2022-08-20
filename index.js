@@ -86,45 +86,46 @@ function createList(projectName, colour) {
         document.getElementById('project').innerHTML = obj.projectName;
         document.getElementById('project').style['color'] = obj.colour;
         // Clearing todo items on DOM
-        document.querySelectorAll('#todo-card').forEach(e => e.remove());
+        document.querySelectorAll('.cards').forEach(e => e.remove());
         // Updating the DOM with the todo items from the respective list clicked on
         for (i=0; i<(obj.todo.length); i++) {
-            todoCont = document.createElement('div');
-            todoCont.id = 'todo-card';
-            todoCont.className = 'cards';
+            cardCont = document.createElement('div');
+            cardCont.className = 'cards';
 
             checkBox = document.createElement('div');
-            checkBox.id = 'todo-checkbox';
             checkBox.className = 'checkbox';
 
-            todoTitle = document.createElement('div');
-            todoTitle.id = 'todo-title';
-            todoTitle.className = 'titles';
-            todoTitle.innerHTML = obj.todo[i].itemName;
+            cardTitle = document.createElement('div');
+            cardTitle.className = 'card-title';
+            cardTitle.innerHTML = obj.todo[i].itemName;
 
-            todoSub = document.createElement('div');
-            todoSub.id = 'todo-subcontainer';
-            todoSub.className = 'subcontainer';
+            cardSub = document.createElement('div');
+            cardSub.className = 'card-subcontainer';
 
-            todoSubItem = document.createElement('div');
-            todoSubItem.id = 'todo-subitem';
-            todoSubItem.innerHTML = obj.todo[i].subItems;
+            cardSubItem = document.createElement('div');
+            cardSubItem.className = 'subitems';
+            cardSubItem.innerHTML = obj.todo[i].subItems;
 
-            todoDue = document.createElement('div');
-            todoDue.id = 'todo-due';
-            todoDue.innerHTML = obj.todo[i].dueDate;
+            cardDue = document.createElement('div');
+            cardDue.className = 'due-date';
+            cardDue.innerHTML = obj.todo[i].dueDate;
 
-            document.getElementById('todo').appendChild(todoCont);
-            todoCont.appendChild(checkBox);
-            todoCont.appendChild(todoTitle);
-            todoCont.appendChild(todoSub);
-            todoSub.appendChild(todoSubItem);
-            todoSub.appendChild(todoDue);
+            if (obj.todo[i].status==false) {        // Append to 'to complete' list
+                document.getElementById('todo').appendChild(cardCont);
+            }
+            if (obj.todo[i].status==true) {         // Append to 'completed' list
+                document.getElementById('completed').appendChild(cardCont);
+            }
+            cardCont.appendChild(checkBox);
+            cardCont.appendChild(cardTitle);
+            cardCont.appendChild(cardSub);
+            cardSub.appendChild(cardSubItem);
+            cardSub.appendChild(cardDue);
 
-            checkBox.addEventListener('click', checkItem.bind(this, obj, i, todoCont));
-            function checkItem(obj, i, todoCont) {
+            checkBox.addEventListener('click', checkItem.bind(this, obj, i, cardCont));
+            function checkItem(obj, i, cardCont) {
                 obj.todo[i].status = true;
-                document.getElementById('completed').appendChild(todoCont);
+                document.getElementById('completed').appendChild(cardCont);
                 console.log('appended'+obj.todo[i]);
             }
 
