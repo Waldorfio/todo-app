@@ -121,10 +121,19 @@ function createList(projectName, colour) {
             todoSub.appendChild(todoSubItem);
             todoSub.appendChild(todoDue);
 
+            checkBox.addEventListener('click', checkItem.bind(this, obj, i, todoCont));
+            function checkItem(obj, i, todoCont) {
+                obj.todo[i].status = true;
+                document.getElementById('completed').appendChild(todoCont);
+                console.log('appended'+obj.todo[i]);
+            }
+
         }
     }
 
 }
+
+
 
 
     // Collapse Completed/Incomplete tasks
