@@ -15,11 +15,12 @@ audio.preload = 'auto';
 
 
 containerLog = [];
-function containerFactory(projectName, colour, todo) {
+function containerFactory(projectName, colour, todo, index) {
     return {
         projectName: projectName,
         colour: colour,
         todo: todo,
+        index: index,
     }
 }
 
@@ -37,22 +38,25 @@ function todoFactory(itemName, subItems, dueDate, status) {
 
 
     // Create new list
+j = 1;
+
 
 newContainer = document.getElementById('new-container');
 newContainer.addEventListener('click', function() {
-    newList = containerFactory('placeholder', 'orange', []);
+    newList = containerFactory('placeholder', 'orange', [], j);
     cc = todoFactory('tester', '7 of 11', 'Mon, 17 Aug', false);
     newList.todo.push(cc);
-    createList('placeholder', 'orange');
+    createList('placeholder', 'orange', j);
     containerLog.push(newList);
+    j = j + 1;
 });
 
 
 let i = 1;
-function createList(projectName, colour) {
+function createList(projectName, colour, j) {
     divContainer = document.createElement('div');
     divContainer.id = 'project-template-container';
-    
+
     stackLogo = document.createElement('span');
     stackLogo.className = 'material-symbols-outlined';
     stackLogo.innerHTML = 'menu';
@@ -76,23 +80,37 @@ function createList(projectName, colour) {
     list.select();              // Highlights the new list
     listIndex = listIndex + 1;
 
+
+
+
+    // Update the project name on RHS (coloured)
+    console.log(containerLog)
+    obj = containerLog[listIndex-1];
+    document.getElementById('project').innerHTML = projectName+listIndex;
+    document.getElementById('project').style['color'] = colour;
+    document.getElementById('project').value = j;
+    console.log('the value: '+document.getElementById('project').value)
+
+
+
+    
     // Update object if list name changes
     function updateListName() {
         list.addEventListener("change", listChange.bind(this, list, listIndex));
         function listChange(list,listIndex) {
-            console.log(list.value);
             containerLog[listIndex-1].projectName = list.value;
         }
     }
     updateListName();
 
     // Wiping content per tab change
-    divContainer.addEventListener("click", switchTab.bind(this, listIndex));
-    function switchTab(listIndex) {
-        console.log('tab switching...');
+    divContainer.addEventListener("click", switchTab.bind(this, listIndex, j));
+    function switchTab(listIndex, j) {
         obj = containerLog[listIndex-1];
         document.getElementById('project').innerHTML = obj.projectName;
         document.getElementById('project').style['color'] = obj.colour;
+        document.getElementById('project').value = j;
+        
         // Clearing todo items on DOM
         document.querySelectorAll('.cards').forEach(e => e.remove());
         // Updating the DOM with the todo items from the respective list clicked on
@@ -138,15 +156,92 @@ function createList(projectName, colour) {
                 audio.play();
                 console.log('appended'+obj.todo[i]);
             }
-
         }
     }
 
+    function updateDom(listIndex) {
+        obj = containerLog[listIndex-1];
+        // Update the project name and colour
+        document.getElementById('project').innerHTML = obj.projectName;
+        document.getElementById('project').style['color'] = obj.colour;
+        // Clearing todo items on DOM
+        document.querySelectorAll('.cards').forEach(e => e.remove());
+        // Updating the DOM with the todo items from the respective list clicked on
+        for (i=0; i<(obj.todo.length); i++) {
+            cardCont = document.createElement('div');
+            cardCont.className = 'cards';
+
+            checkBox = document.createElement('div');
+            checkBox.className = 'checkbox';
+
+            cardTitle = document.createElement('div');
+            cardTitle.className = 'card-title';
+            cardTitle.innerHTML = obj.todo[i].itemName;
+
+            cardSub = document.createElement('div');
+            cardSub.className = 'card-subcontainer';
+
+            cardSubItem = document.createElement('div');
+            cardSubItem.className = 'subitems';
+            cardSubItem.innerHTML = obj.todo[i].subItems;
+
+            cardDue = document.createElement('div');
+            cardDue.className = 'due-date';
+            cardDue.innerHTML = obj.todo[i].dueDate;
+
+            if (obj.todo[i].status==false) {        // Append to 'to complete' list
+                document.getElementById('todo').appendChild(cardCont);
+            }
+            if (obj.todo[i].status==true) {         // Append to 'completed' list
+                document.getElementById('completed').appendChild(cardCont);
+            }
+            cardCont.appendChild(checkBox);
+            cardCont.appendChild(cardTitle);
+            cardCont.appendChild(cardSub);
+            cardSub.appendChild(cardSubItem);
+            cardSub.appendChild(cardDue);
+
+            // Checkbox ticking (REFACTOR ME LATER-----------------)
+            checkBox.addEventListener('click', checkItem.bind(this, obj, i, cardCont));
+            function checkItem(obj, i, cardCont) {
+                obj.todo[i].status = true;
+                document.getElementById('completed').appendChild(cardCont);
+                audio.currentTime = 0.08;
+                audio.play();
+                console.log('appended'+obj.todo[i]);
+            }
+        }
+    }
+
+
 }
+
+
+// Update object if task name
+document.getElementById('project').innerHTML;
+
+addTaskId = document.getElementById('add-task');
+addTaskId.addEventListener("click", newTaskAdd.bind(this, addTaskId, listIndex));
+function newTaskAdd(addTaskId, listIndex) {
+    console.log('clicked the input text');
+    document.addEventListener("keypress", function(event) {
+        if (event.key == 'Enter') {
+            console.log('clicked the ENTER key.');
+            cc = todoFactory(addTaskId.value, '7 of 11', 'Mon, 17 Aug', false);
+            containerLog[listIndex].todo.push(cc);
+            addTaskId.value = '';           // Clear the input box
+            // console.log('containerLog[0]: '+containerLog[0]);
+            // console.log('containerLog[1]: '+containerLog[1]);
+            // console.log('containerLog[2]: '+containerLog[2]);
+            updateDom(listIndex);
+        }
+    });
+}
+
 
     // COLLAPSING ITEMS
 
-// Controls incomplete tasks
+// Controls incomplete tasks -------- CAN REFACTOR
 let hiddenTodo = false;
 toCompId = document.getElementById('to-complete-id');
 toCompId.addEventListener('click', () => collapseTodo());
