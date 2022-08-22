@@ -1,6 +1,7 @@
 # Project: To-Do App
 ### [LINK](https://waldorfio.github.io/todo-app/)
-An interactive AND intuitive to-do app built using JavaScript, CSS, html and Webpack.
+An interactive and intuitive to-do list app, where you can make simple lists in an easy-to-use environment. Built using vanilla JavaScript ES6, CSS3, and HTML5.
+Packaged using Webpack.
 
 ### Goal
 - To refine and practice the fundamentals of Javascript, CSS and HTML.
