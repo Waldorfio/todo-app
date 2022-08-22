@@ -13,7 +13,6 @@ audio.preload = 'auto';
 
 // -------- FACTORY FUNCTIONS  -------- //
 
-
 let containerLog = [];
 function containerFactory(projectName, colour, todo, index) {
     return {
@@ -68,7 +67,7 @@ function createList(projectName, colour, j) {
     list.className = 'project-template';
     list.type = 'text';
     list.name = projectName;
-    list.value = projectName+listIndex;
+    list.value = projectName+j;
 
     // Append new elements to container
     document.getElementById('project-list-container').appendChild(divContainer);
@@ -78,38 +77,29 @@ function createList(projectName, colour, j) {
     // Select the newly created list
     list.focus();               // Clicks on the new list
     list.select();              // Highlights the new list
-    listIndex = listIndex + 1;
-
-
-
 
     // Update the project name on RHS (coloured)
-    console.log(containerLog)
-    obj = containerLog[listIndex-1];
-    document.getElementById('project').innerHTML = projectName+listIndex;
+    obj = containerLog[j-1];
+    document.getElementById('project').innerHTML = projectName+j;
     document.getElementById('project').style['color'] = colour;
     document.getElementById('project').value = j;
-    console.log('the value: '+document.getElementById('project').value)
 
-
-
-    
     // Update object if list name changes
-    function updateListName() {
-        list.addEventListener("change", listChange.bind(this, list, listIndex));
-        function listChange(list,listIndex) {
-            containerLog[listIndex-1].projectName = list.value;
-        }
+    divContainer.addEventListener("click", listChange.bind(this, list, j));
+    list.addEventListener("input", listChange.bind(this, list, j));
+    function listChange(list,j) {
+        containerLog[j-1].projectName = list.value;
+        document.getElementById('project').innerHTML = containerLog[j-1].projectName;
+        console.log('i set you to: '+list.value);
     }
-    updateListName();
 
-    // Wiping content per tab change
-    divContainer.addEventListener("click", updateDom.bind(this, listIndex, j));
+    // Adds event listener to the new list, to update its DOM every time tabs are SWITCHED
+    divContainer.addEventListener("click", updateDom.bind(this, j));
 
 }
 
-function updateDom(listIndex, j) {
-    obj = containerLog[listIndex-1];
+function updateDom(j) {
+    obj = containerLog[j-1];
     // Update the project name and colour
     document.getElementById('project').innerHTML = obj.projectName;
     document.getElementById('project').style['color'] = obj.colour;
@@ -158,29 +148,24 @@ function updateDom(listIndex, j) {
             document.getElementById('completed').appendChild(cardCont);
             audio.currentTime = 0.08;
             audio.play();
-            console.log('appended'+obj.todo[i]);
         }
     }
 }
 
-// Update object if enter text in "Ad a task" box
+// Update object if enter text in "Add a task" box
 addTaskId = document.getElementById('add-task');
 addTaskId.addEventListener("click", newTaskAdd.bind(this, addTaskId));
 function newTaskAdd(addTaskId) {
-    console.log('clicked the input text');
     listIndex = document.getElementById('project').value - 1;
-    console.log('index: '+listIndex);
     document.addEventListener("keypress", function(event) {
         if (event.key == 'Enter') {
-            console.log('clicked the ENTER key.');
             cc = todoFactory(addTaskId.value, '7 of 11', 'Mon, 17 Aug', false);
             containerLog[listIndex].todo.push(cc);
             addTaskId.value = '';           // Clear the input box
-            updateDom(listIndex+1, listIndex);
+            updateDom(listIndex+1);
         }
     });
 }
-
 
     // COLLAPSING ITEMS
 
