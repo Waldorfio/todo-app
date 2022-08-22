@@ -1,9 +1,11 @@
 # Project: To-Do App
-An interactive, and intuititive to-do app built using javascript, css, html and webpack.
+### [LINK](https://waldorfio.github.io/todo-app/)
+An interactive AND intuitive to-do app built using JavaScript, CSS, html and Webpack.
 
-Goal:
+### Goal
 - To refine and practice the fundamentals of Javascript, CSS and HTML.
 - To apply OOP Pinciples (SOLID) on a real project.
 
-Challenges Faced:
+### Challenges Faced
+- Developing code in accordance with the SOLID principles of OOP.
 - Making an intuititive to-do app that people would actually use.
