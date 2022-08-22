@@ -1,15 +1,13 @@
 console.clear();
 
-
 // -------- INITIALISING VARIABLES  -------- //
 
-let listIndex = 0;      // Stores the index of lists created
+let j = 1;              // Index to store number of lists created
 
+// Create an audio effect
 const audio = new Audio();
 audio.src = "completed.mp3";
-audio.preload = 'auto';
-
-
+audio.preload = 'auto'; // Preload it by initialising it here, to call later (efficient)
 
 // -------- FACTORY FUNCTIONS  -------- //
 
@@ -35,11 +33,7 @@ function todoFactory(itemName, subItems, dueDate, status) {
 
 // -------- FUNCTIONS  -------- //
 
-
     // Create new list
-let j = 1;
-
-
 newContainer = document.getElementById('new-container');
 newContainer.addEventListener('click', function() {
     newList = containerFactory('placeholder', 'orange', [], j);
@@ -49,7 +43,6 @@ newContainer.addEventListener('click', function() {
     containerLog.push(newList);
     j = j + 1;
 });
-
 
 let i = 1;
 function createList(projectName, colour, j) {
@@ -84,22 +77,22 @@ function createList(projectName, colour, j) {
     document.getElementById('project').style['color'] = colour;
     document.getElementById('project').value = j;
 
-    // Update object if list name changes
-    divContainer.addEventListener("click", listChange.bind(this, list, j));
+    // Listens to changes in the input text, to make changes across DOM and object
     list.addEventListener("input", listChange.bind(this, list, j));
-    function listChange(list,j) {
-        containerLog[j-1].projectName = list.value;
-        document.getElementById('project').innerHTML = containerLog[j-1].projectName;
-        console.log('i set you to: '+list.value);
-    }
-
-    // Adds event listener to the new list, to update its DOM every time tabs are SWITCHED
-    divContainer.addEventListener("click", updateDom.bind(this, j));
+    // Listens for when the container list is clicked on, to refresh DOM
+    divContainer.addEventListener("click", updateDom.bind(this, j, list));
 
 }
 
-function updateDom(j) {
+// Function to update the list name if it is change, in DOM and object
+function listChange(list,j) {
+    containerLog[j-1].projectName = list.value;
+    document.getElementById('project').innerHTML = containerLog[j-1].projectName;
+}
+
+function updateDom(j, list ) {
     obj = containerLog[j-1];
+    obj.projectName = list.value;
     // Update the project name and colour
     document.getElementById('project').innerHTML = obj.projectName;
     document.getElementById('project').style['color'] = obj.colour;
