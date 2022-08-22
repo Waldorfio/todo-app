@@ -53,10 +53,10 @@ function createList(projectName, colour, j) {
     stackLogo.className = 'material-symbols-outlined';
     stackLogo.innerHTML = 'menu';
     stackLogo.style['color'] = colour;
-    stackLogo.id = 'stack-logo'+listIndex;
+    stackLogo.id = 'stack-logo'+j;
 
     list = document.createElement('input');
-    list.id = 'item'+listIndex;
+    list.id = 'item'+j;
     list.className = 'project-template';
     list.type = 'text';
     list.name = projectName;
@@ -90,9 +90,14 @@ function listChange(list,j) {
     document.getElementById('project').innerHTML = containerLog[j-1].projectName;
 }
 
-function updateDom(j, list ) {
+function updateDom(j, list) {
     obj = containerLog[j-1];
-    obj.projectName = list.value;
+    // Try updating list value (i.e. project name on LHS container), if clicked on. Otherwise ignore.
+    try {
+        obj.projectName = list.value;
+    } catch (error) {
+        console.log('Already updated project name.')
+    }
     // Update the project name and colour
     document.getElementById('project').innerHTML = obj.projectName;
     document.getElementById('project').style['color'] = obj.colour;
@@ -147,18 +152,15 @@ function updateDom(j, list ) {
 
 // Update object if enter text in "Add a task" box
 addTaskId = document.getElementById('add-task');
-addTaskId.addEventListener("click", newTaskAdd.bind(this, addTaskId));
-function newTaskAdd(addTaskId) {
+addTaskId.addEventListener("keyup", function(e) {
     listIndex = document.getElementById('project').value - 1;
-    document.addEventListener("keypress", function(event) {
-        if (event.key == 'Enter') {
-            cc = todoFactory(addTaskId.value, '7 of 11', 'Mon, 17 Aug', false);
-            containerLog[listIndex].todo.push(cc);
-            addTaskId.value = '';           // Clear the input box
-            updateDom(listIndex+1);
-        }
-    });
-}
+    if (e.key === 'Enter') {
+        cc = todoFactory(addTaskId.value, '7 of 11', 'Mon, 17 Aug', false);
+        containerLog[listIndex].todo.push(cc);
+        addTaskId.value = '';           // Clear the input box
+        updateDom(listIndex+1);
+    }
+})
 
     // COLLAPSING ITEMS
 
