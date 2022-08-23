@@ -37,8 +37,8 @@ function todoFactory(itemName, subItems, dueDate, status) {
 newContainer = document.getElementById('new-container');
 newContainer.addEventListener('click', function() {
     newList = containerFactory('placeholder', 'orange', [], j);
-    cc = todoFactory('tester', '7 of 11', 'Mon, 17 Aug', false);
-    newList.todo.push(cc);
+    // cc = todoFactory('placeholder item', '1 of 1', tomorrowDate(), false);
+    // newList.todo.push(cc);
     createList('placeholder', 'orange', j);
     containerLog.push(newList);
     j = j + 1;
@@ -198,13 +198,20 @@ addTaskId = document.getElementById('add-task');
 addTaskId.addEventListener("keyup", function(e) {
     listIndex = document.getElementById('project').value - 1;
     if (e.key === 'Enter') {
-        cc = todoFactory(addTaskId.value, '7 of 11', 'Mon, 17 Aug', false);
+        cc = todoFactory(addTaskId.value, '1 of 1', tomorrowDate(), false);
         containerLog[listIndex].todo.push(cc);
         addTaskId.value = '';           // Clear the input box
         updateDom(listIndex+1);
     }
 })
 
+function tomorrowDate() {
+    const today = new Date()
+    let tomorrow =  new Date()
+    tomorrow.setDate(today.getDate() + 1);
+    tomorrow = tomorrow.toLocaleString('en-US');    // Remove the timezone
+    return tomorrow
+}
     // COLLAPSING ITEMS
 
 // Controls incomplete tasks -------- CAN REFACTOR
