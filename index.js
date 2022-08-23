@@ -82,6 +82,49 @@ function createList(projectName, colour, j) {
     // Listens for when the container list is clicked on, to refresh DOM
     divContainer.addEventListener("click", updateDom.bind(this, j, list));
 
+    createDropdown(stackLogo);
+}
+
+function createDropdown(stackLogo) {
+    // Append to HTML DOM
+    dropContainer = document.createElement('div');
+    dropContainer.className = 'list-dropdown-container';
+    stackLogo.appendChild(dropContainer);
+
+    renameList = document.createElement('div');
+    renameList.className = 'rename-list';
+    renameList.innerHTML = 'Rename List';
+    dropContainer.appendChild(renameList);
+
+    deleteList = document.createElement('div');
+    deleteList.className = 'delete-list';
+    deleteList.innerHTML = 'Delete List';
+    dropContainer.appendChild(deleteList);
+
+    dropContainer.style.visibility = 'hidden';
+
+    // Create the Javascript functionality
+    stackLogo.addEventListener('click', listDropdown.bind(this,stackLogo,dropContainer));
+    function listDropdown(stackLogo, dropContainer, e) {
+        dropContainer.style.visibility = '';                // Unhide the dropdown
+        // checkOutsideClick();
+        if (e.target.className == renameList.className) {
+            console.log('renamed.');
+            dropContainer.style.visibility = 'hidden';      // Rehide the dropdown
+            dropContainer.parentNode.parentNode.lastChild.select();
+        }
+        if (e.target.className == deleteList.className) {
+            console.log('deleted.');
+            dropContainer.style.visibility = 'hidden';      // Rehide the dropdown
+            dropContainer.parentNode.parentNode.innerHTML = '';
+        }
+        if (e.target.className!=renameList.className &&
+            e.target.className!=deleteList.className &&
+            e.target.className!=stackLogo.className) {
+            console.log('outside click');
+            dropContainer.style.visibility = 'hidden';      // Rehide the dropdown
+        }
+    }
 }
 
 // Function to update the list name if it is change, in DOM and object

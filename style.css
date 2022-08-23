@@ -142,6 +142,31 @@ body {
             #project-template-container:hover:active .project-template {
                 background-color: rgb(68,68,68);
             }
+
+            /* List Dropdown */
+            .list-dropdown-container {
+                width: 250px;
+                position: absolute;
+                /* left: 14px;
+                top: 36px; */
+            
+                background-color: rgb(34,34,34);
+                border: 1px solid rgb(51,51,51);
+                border-radius: 5px;
+            
+                display: grid;
+                grid-template-rows: 1fr 1fr;
+            }
+            .rename-list, .delete-list {
+                padding: 10px;
+                font-size: 0.55em;
+            }
+            .rename-list:hover, .delete-list:hover {
+                background-color: rgb(55,55,55);
+            }
+            .rename-list:hover:active, .delete-list:hover:active {
+                background-color: rgb(68,68,68);
+            }
     #new-container {
         display: grid;
         grid-template-columns: 40px 1fr;
