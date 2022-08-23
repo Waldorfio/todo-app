@@ -1,3 +1,5 @@
+import './style.css'; // Load css file
+
 console.clear();
 
 // -------- INITIALISING VARIABLES  -------- //
