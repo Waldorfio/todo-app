@@ -1,4 +1,5 @@
 import './style.css'; // Load css file
+import soundFile from '../completed.mp3'; // Load sound effect
 
 console.clear();
 
@@ -7,8 +8,7 @@ console.clear();
 let j = 1; // Index to store number of lists created
 
 // Create an audio effect
-const audio = new Audio();
-audio.src = 'completed.mp3';
+const audio = new Audio(soundFile);
 audio.preload = 'auto'; // Preload it by initialising it here, to call later (efficient)
 
 // -------- FACTORY FUNCTIONS  -------- //
