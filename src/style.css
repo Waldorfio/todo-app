@@ -14,6 +14,7 @@ body {
     grid-template-columns: 280px 1fr;
 }
 
+
 #lhs-container {
     display: grid;
     grid-template-rows: 70px 35px 1fr 50px;
@@ -337,3 +338,28 @@ body {
         #add-task {
             background-color: rgb(42,42,42);
         }
+
+/* Setting mobile behaviour */
+@media only screen and (max-width: 600px) {
+    body {
+        grid-template-columns: 100%;
+    }
+    #lhs-container {
+        grid-template-rows: 210px 100px 1fr 150px;
+    }
+    #new-container {
+        grid-template-columns: 80px 1fr;
+    }
+    #search-bar {
+        font-size: 28px;
+    }
+    * {
+        font-size: 1.2em;
+    }
+}
+/* Setting behaviour for desktop */
+@media only screen and (min-width: 600px) {
+    body {
+        grid-template-columns: 280px 1fr;
+    }
+}
