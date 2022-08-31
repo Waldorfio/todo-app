@@ -10,6 +10,7 @@ body,html {
 }
 
 body {
+    height: 100vh;
     display: grid;
     grid-template-columns: 280px 1fr;
 }
@@ -340,7 +341,7 @@ body {
         }
 
 /* Setting mobile behaviour */
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
     body {
         grid-template-columns: 100%;
     }
@@ -356,10 +357,10 @@ body {
     * {
         font-size: 1.2em;
     }
-}
+} */
 /* Setting behaviour for desktop */
-@media only screen and (min-width: 600px) {
+/* @media only screen and (min-width: 600px) {
     body {
         grid-template-columns: 280px 1fr;
     }
-}
+} */
