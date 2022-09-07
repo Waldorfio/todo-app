@@ -9,4 +9,4 @@ Packaged using Webpack.
 
 ### Challenges Faced
 - Developing clean, readable code aligning with many SOLID principles.
-- Making an intuititive to-do app that people would actually use.
+- Making an intuititive to-do app that people would use.
