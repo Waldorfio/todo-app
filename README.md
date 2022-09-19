@@ -7,6 +7,10 @@ Packaged using Webpack.
 - To refine and practice the fundamentals of Javascript, CSS and HTML.
 - To apply OOP Pinciples (SOLID) on a real project.
 
+### Skill Gained
+- Development using webpack for both a dev and production environment.
+- Responsive web design for small screens.
+
 ### Challenges Faced
 - Developing clean, readable code aligning with many SOLID principles.
 - Making an intuititive to-do app that people would use.
