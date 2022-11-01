@@ -3,7 +3,8 @@
 An interactive and intuitive to-do list app, where you can make simple lists in an easy-to-use environment. Built using vanilla JavaScript ES6, CSS3, and HTML5.
 Packaged using Webpack.
 
-### Goal
+![](screencap.PNG)
+### Goals
 - To refine and practice the fundamentals of Javascript, CSS and HTML.
 - To apply OOP Pinciples (SOLID) on a real project.
 
